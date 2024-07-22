@@ -28,7 +28,7 @@ from tools.project import (
 # Game versions
 DEFAULT_VERSION = 0
 VERSIONS = [
-    "GAMEID",  # 0
+    "GZ3E70",  # 0
 ]
 
 parser = argparse.ArgumentParser()
@@ -151,7 +151,7 @@ config.asflags = [
 config.ldflags = [
     "-fp hardware",
     "-nodefaults",
-    # "-warn off",
+    "-warn off",
     # "-listclosure", # Uncomment for Wii linkers
 ]
 # Use for any additional files that should cause a re-configure when modified
@@ -246,8 +246,18 @@ config.libs = [
             Object(NonMatching, "Runtime.PPCEABI.H/global_destructor_chain.c"),
             Object(NonMatching, "Runtime.PPCEABI.H/__init_cpp_exceptions.cpp"),
         ],
+    },    
+    {
+        "lib": "Dolphin",
+        "mw_version": config.linker_version,
+        "cflags": cflags_runtime,
+        "host": False,
+        "objects": [
+            Object(NonMatching, "dolphin/os/OS.c"),
+        ],
     },
 ]
+
 
 if args.mode == "configure":
     # Write build.ninja and objdiff.json
