@@ -177,7 +177,7 @@ cflags_base = [
     "-fp_contract on",
     "-str reuse",
     "-multibyte",  # For Wii compilers, replace with `-enc SJIS`
-    "-i include",
+    "-i src",
     f"-i build/{config.version}/include",
     f"-DVERSION={version_num}",
 ]
@@ -235,7 +235,7 @@ NonMatching = False               # Object does not match and should not be link
 Equivalent = config.non_matching  # Object should be linked when configured with --non-matching
 
 config.warn_missing_config = True
-config.warn_missing_source = False
+config.warn_missing_source = True
 config.libs = [
     {
         "lib": "Runtime.PPCEABI.H",
@@ -253,7 +253,7 @@ config.libs = [
         "cflags": cflags_runtime,
         "host": False,
         "objects": [
-            Object(NonMatching, "dolphin/os/OS.c"),
+            Object(NonMatching, "Dolphin/os/OS.c"),
         ],
     },
 ]
